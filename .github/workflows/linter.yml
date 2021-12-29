@@ -5,4 +5,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: linter
-      - run: echo 'testing Github Actions'
+        run: echo 'testing Github Actions'
