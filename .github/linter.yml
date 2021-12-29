@@ -1,0 +1,8 @@
+name: linter
+on: push
+jobs:
+  my-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'linter'
+      - run: echo 'testing Github Actions'
