@@ -1,8 +1,17 @@
-name: Testing
+name: linting and testing
 on: push
 jobs:
-  my-job:
+  lint:
     runs-on: ubuntu-latest
     steps:
-      - name: linter
-        run: echo 'testing Github Actions'
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: npm install
+        run: make install
+        env:
+          CI: true
+      - name: run linter
+        run: make lint
