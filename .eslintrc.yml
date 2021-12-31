@@ -4,9 +4,10 @@ env:
 extends:
   - airbnb-base
 parserOptions:
-  ecmaVersion: 13
+  ecmaVersion: 2020
   sourceType: module
 rules:
+  no-underscore-dangle: [2, { 'allow': ['__filename', '__dirname'] }] # разрешает подчёркивание в именах только для двух констант
   no-console: 'off'
   import/extensions: 'off'
   quotes: ['error', 'single', { 'allowTemplateLiterals': true }]
