@@ -30,6 +30,3 @@ jobs:
         with:
           coverageCommand: make test-coverage
           debug: true
-
-      - name: Test printing your secret (Remove this step in production)
-        run: cat $HOME/secrets/my_secret.json
