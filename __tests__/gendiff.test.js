@@ -13,3 +13,7 @@ const result = `{
 test('🦜 compare flat json files:', () => {
   expect(compareFiles('file1.json', 'file2.json')).toBe(result);
 });
+
+test('🦖 compare flat yaml files:', () => {
+  expect(compareFiles('file1.yaml', 'file2.yaml')).toBe(result);
+});
