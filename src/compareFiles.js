@@ -1,11 +1,12 @@
 import _ from 'lodash';
-import readFile from './readFile.js';
-
-const parseFile = (file) => JSON.parse(file, null, '  ');
+import parseFile from './parser.js';
 
 const compareFiles = (file1, file2) => {
-  const obj1 = parseFile(readFile(file1));
-  const obj2 = parseFile(readFile(file2));
+  if (!parseFile(file1) || !parseFile(file2)) return null;
+
+  const obj1 = parseFile(file1);
+  const obj2 = parseFile(file2);
+
   const keys1 = Object.keys(obj1);
   const keys2 = Object.keys(obj2);
   const keys = [...keys1, ...keys2];
