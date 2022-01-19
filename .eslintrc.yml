@@ -11,3 +11,4 @@ rules:
   no-console: 'off'
   import/extensions: 'off'
   quotes: ['error', 'single', { 'allowTemplateLiterals': true }]
+  object-curly-newline: ['error', { 'multiline': true }]
