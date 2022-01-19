@@ -11,3 +11,7 @@
 ### Comparison yaml files
 
 [![asciicast](https://asciinema.org/a/yzLfywPFBXI1piarMq8H5fGgF.svg)](https://asciinema.org/a/yzLfywPFBXI1piarMq8H5fGgF)
+
+### Stylish output
+
+[![asciicast](https://asciinema.org/a/ufTBNvQBgUnbFTWNE2eiSsVsX.svg)](https://asciinema.org/a/ufTBNvQBgUnbFTWNE2eiSsVsX)
