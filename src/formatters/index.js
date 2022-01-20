@@ -13,6 +13,7 @@ const getFormat = (tree, formatName) => {
   if (formatName === 'json') {
     return JSON.stringify(tree, null, 2);
   }
+  return null;
 };
 
 export default getFormat;
