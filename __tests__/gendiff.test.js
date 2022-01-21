@@ -24,14 +24,14 @@ test('compare json files (default output): ', () => {
 });
 
 test('compare yaml files (plain output): ', () => {
-  const actual = compareFiles('file1.yaml', 'file2.yaml', 'plain');
+  const actual = compareFiles('file1.yml', 'file2.yml', 'plain');
   const expected = expectedDataPlain;
 
   expect(actual).toBe(expected);
 });
 
-test('compare json file with yaml file (json output): ', () => {
-  const actual = compareFiles('file1.json', 'file2.yaml', 'json');
+test('compare json file with yml file (json output): ', () => {
+  const actual = compareFiles('file1.json', 'file2.yml', 'json');
   const expected = expectedDataJson;
 
   expect(actual).toBe(expected);
