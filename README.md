@@ -19,3 +19,7 @@
 ### Plain output
 
 [![asciicast](https://asciinema.org/a/ASPCYJkm5ylHONiQXJ9Vd5PpU.svg)](https://asciinema.org/a/ASPCYJkm5ylHONiQXJ9Vd5PpU)
+
+### Json output
+
+[![asciicast](https://asciinema.org/a/ySKtNGFEkUDVh1SrEI9ppblPr.svg)](https://asciinema.org/a/ySKtNGFEkUDVh1SrEI9ppblPr)
