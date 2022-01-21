@@ -15,3 +15,7 @@
 ### Stylish output
 
 [![asciicast](https://asciinema.org/a/ufTBNvQBgUnbFTWNE2eiSsVsX.svg)](https://asciinema.org/a/ufTBNvQBgUnbFTWNE2eiSsVsX)
+
+### Plain output
+
+[![asciicast](https://asciinema.org/a/ASPCYJkm5ylHONiQXJ9Vd5PpU.svg)](https://asciinema.org/a/ASPCYJkm5ylHONiQXJ9Vd5PpU)
