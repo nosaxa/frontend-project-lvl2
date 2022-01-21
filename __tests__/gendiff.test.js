@@ -1,7 +1,15 @@
 import { test, expect, beforeAll } from '@jest/globals';
 import fs from 'fs';
-import getFixturePath from '../src/getFixturePath.js';
+import path from 'path';
+import { fileURLToPath } from 'url';
 import compareFiles from '../src/compareFiles.js';
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
+const getFixturePath = (fileName) => {
+  const fixturePath = path.join(__dirname, '..', '__fixtures__', fileName);
+  return fixturePath;
+};
 
 let expectedDataStylish;
 let expectedDataPlain;
