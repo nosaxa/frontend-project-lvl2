@@ -10,6 +10,7 @@ const getFixturePath = (fileName) => {
   const fixturePath = path.join(__dirname, '..', '__fixtures__', fileName);
   return fixturePath;
 };
+const fixPath = '__fixtures__/';
 
 let expectedDataStylish;
 let expectedDataPlain;
@@ -25,21 +26,29 @@ beforeAll(() => {
 });
 
 test('compare json files (default output): ', () => {
-  const actual = compareFiles('file1.json', 'file2.json');
+  const actual = compareFiles(`${fixPath}file1.json`, `${fixPath}file2.json`);
   const expected = expectedDataStylish;
 
   expect(actual).toBe(expected);
 });
 
 test('compare yaml files (plain output): ', () => {
-  const actual = compareFiles('file1.yml', 'file2.yml', 'plain');
+  const actual = compareFiles(
+    `${fixPath}file1.yml`,
+    `${fixPath}file2.yml`,
+    'plain',
+  );
   const expected = expectedDataPlain;
 
   expect(actual).toBe(expected);
 });
 
 test('compare json file with yml file (json output): ', () => {
-  const actual = compareFiles('file1.json', 'file2.yml', 'json');
+  const actual = compareFiles(
+    `${fixPath}file1.yml`,
+    `${fixPath}file2.json`,
+    'json',
+  );
   const expected = expectedDataJson;
 
   expect(actual).toBe(expected);
