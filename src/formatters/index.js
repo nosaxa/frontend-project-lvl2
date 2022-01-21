@@ -1,7 +1,7 @@
 import makeStylish from './stylish.js';
 import makePlain from './plain.js';
 
-const getFormat = (tree, formatName) => {
+const makeFormattedOutput = (tree, formatName) => {
   if (formatName === 'stylish') {
     return makeStylish(tree);
   }
@@ -16,4 +16,4 @@ const getFormat = (tree, formatName) => {
   return null;
 };
 
-export default getFormat;
+export default makeFormattedOutput;

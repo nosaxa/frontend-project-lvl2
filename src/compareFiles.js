@@ -1,6 +1,6 @@
 import parseFile from './parser.js';
 import buildDiffTree from './buildDiffTree.js';
-import getFormat from './formatters/index.js';
+import makeFormattedOutput from './formatters/index.js';
 
 const compareFiles = (file1, file2, format = 'stylish') => {
   if (!parseFile(file1) || !parseFile(file2)) return null;
@@ -9,7 +9,7 @@ const compareFiles = (file1, file2, format = 'stylish') => {
   const obj2 = parseFile(file2);
   const tree = buildDiffTree(obj1, obj2);
 
-  const result = getFormat(tree, format);
+  const result = makeFormattedOutput(tree, format);
   return result;
 };
 
