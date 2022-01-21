@@ -11,7 +11,7 @@ const makeFormattedOutput = (tree, formatName) => {
   }
 
   if (formatName === 'json') {
-    return JSON.stringify(tree, null, 2);
+    return JSON.stringify(tree);
   }
   return null;
 };
