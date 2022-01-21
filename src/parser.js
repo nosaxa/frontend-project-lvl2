@@ -5,17 +5,19 @@ import readFile from './readFile.js';
 const getExtensionName = (file) => path.extname(file);
 
 const parseFile = (file) => {
+  const data = readFile(file);
   const format = getExtensionName(file);
+  let parse;
 
   if (format === '.json') {
-    return JSON.parse(readFile(file), null, '  ');
+    parse = JSON.parse;
   }
 
   if (format === '.yaml' || format === '.yml') {
-    return yaml.load(readFile(file));
+    parse = yaml.load;
   }
 
-  return null;
+  return parse(data);
 };
 
 export default parseFile;
