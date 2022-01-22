@@ -1,4 +1,4 @@
-import { test, expect, beforeAll } from '@jest/globals';
+import { test, expect } from '@jest/globals';
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -12,27 +12,27 @@ const getFixturePath = (fileName) => {
 };
 const fixPath = '__fixtures__/';
 
-let expectedDataStylish;
-let expectedDataPlain;
-let expectedDataJson;
+const expectedDataStylish = fs.readFileSync(
+  getFixturePath('output.txt'),
+  'utf8',
+);
+const expectedDataJson = fs.readFileSync(
+  getFixturePath('outputJson.txt'),
+  'utf8',
+);
+const expectedDataPlain = fs.readFileSync(
+  getFixturePath('outputPlain.txt'),
+  'utf8',
+);
 
-beforeAll(() => {
-  expectedDataStylish = fs.readFileSync(getFixturePath('output.txt'), 'utf8');
-  expectedDataJson = fs.readFileSync(getFixturePath('outputJson.txt'), 'utf8');
-  expectedDataPlain = fs.readFileSync(
-    getFixturePath('outputPlain.txt'),
-    'utf8',
-  );
-});
-
-test('compare json files (default output): ', () => {
+test('compare json files (default output):', () => {
   const actual = compareFiles(`${fixPath}file1.json`, `${fixPath}file2.json`);
   const expected = expectedDataStylish;
 
   expect(actual).toBe(expected);
 });
 
-test('compare yaml files (plain output): ', () => {
+test('compare yaml files (plain output):', () => {
   const actual = compareFiles(
     `${fixPath}file1.yml`,
     `${fixPath}file2.yml`,
@@ -43,7 +43,7 @@ test('compare yaml files (plain output): ', () => {
   expect(actual).toBe(expected);
 });
 
-test('compare json file with yml file (json output): ', () => {
+test('compare json file with yml file (json output):', () => {
   const actual = compareFiles(
     `${fixPath}file1.yml`,
     `${fixPath}file2.json`,

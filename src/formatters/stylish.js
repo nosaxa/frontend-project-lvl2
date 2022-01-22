@@ -24,45 +24,43 @@ const stringify = (data, depth) => {
 
   return ['{', ...lines, `${makeIndent(depth + closeIndent)}}`].join('\n');
 };
-
+// { key, status, value, oldValue, newValue, children }
 export default (tree) => {
   const iter = (currentValue, depth) => {
-    const lines = currentValue.map(
-      ({ key, status, value, oldValue, newValue, children }) => {
-        switch (status) {
-          case 'added':
-            return `${makeIndent(depth + INDENT_SIZE)}+ ${key}: ${stringify(
-              value,
-              depth,
-            )}`;
-          case 'deleted':
-            return `${makeIndent(depth + INDENT_SIZE)}- ${key}: ${stringify(
-              value,
-              depth,
-            )}`;
-          case 'changed':
-            return `${makeIndent(depth + INDENT_SIZE)}- ${key}: ${stringify(
-              oldValue,
-              depth,
-            )}\n${makeIndent(depth + INDENT_SIZE)}+ ${key}: ${stringify(
-              newValue,
-              depth,
-            )}`;
-          case 'unchanged':
-            return `${makeIndent(depth + INDENT_SIZE)}  ${key}: ${stringify(
-              value,
-              depth,
-            )}`;
-          case 'nested':
-            return `${makeIndent(depth + INDENT_SIZE)}  ${key}: ${iter(
-              children,
-              depth + INDENT_SIZE * 2,
-            )}`;
-          default:
-            throw new Error(`Wrong type ${status}`);
-        }
-      },
-    );
+    const lines = currentValue.map((line) => {
+      switch (line.status) {
+        case 'added':
+          return `${makeIndent(depth + INDENT_SIZE)}+ ${line.key}: ${stringify(
+            line.value,
+            depth,
+          )}`;
+        case 'deleted':
+          return `${makeIndent(depth + INDENT_SIZE)}- ${line.key}: ${stringify(
+            line.value,
+            depth,
+          )}`;
+        case 'changed':
+          return `${makeIndent(depth + INDENT_SIZE)}- ${line.key}: ${stringify(
+            line.oldValue,
+            depth,
+          )}\n${makeIndent(depth + INDENT_SIZE)}+ ${line.key}: ${stringify(
+            line.newValue,
+            depth,
+          )}`;
+        case 'unchanged':
+          return `${makeIndent(depth + INDENT_SIZE)}  ${line.key}: ${stringify(
+            line.value,
+            depth,
+          )}`;
+        case 'nested':
+          return `${makeIndent(depth + INDENT_SIZE)}  ${line.key}: ${iter(
+            line.children,
+            depth + INDENT_SIZE * 2,
+          )}`;
+        default:
+          throw new Error(`Wrong type ${line.status}`);
+      }
+    });
     return ['{', ...lines, `${makeIndent(depth)}}`].join('\n');
   };
   return iter(tree, 0);
