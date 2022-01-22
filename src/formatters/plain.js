@@ -4,7 +4,7 @@ const outputValue = (val) => {
   if (_.isPlainObject(val)) return '[complex value]';
   return typeof val === 'string' ? `'${val}'` : val;
 };
-// { key, status, oldValue, newValue, children, value }
+
 const makePlain = (tree) => {
   const iter = (currentValue, path) => {
     const lines = currentValue

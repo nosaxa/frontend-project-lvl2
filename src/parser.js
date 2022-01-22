@@ -9,7 +9,7 @@ const parseFile = (data, ext) => {
     return yaml.load(data);
   }
 
-  return new Error(`Invalid extension`);
+  return new Error('Invalid extension');
 };
 
 export default parseFile;

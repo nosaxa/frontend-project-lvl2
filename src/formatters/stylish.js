@@ -24,7 +24,7 @@ const stringify = (data, depth) => {
 
   return ['{', ...lines, `${makeIndent(depth + closeIndent)}}`].join('\n');
 };
-// { key, status, value, oldValue, newValue, children }
+
 export default (tree) => {
   const iter = (currentValue, depth) => {
     const lines = currentValue.map((line) => {
