@@ -27,7 +27,7 @@ const makePlain = (tree) => {
           case 'nested':
             return iter(line.children, keys);
           default:
-            return `Wrong status: ${line.status}`;
+            throw new Error(`Wrong status: ${line.status}`);
         }
       });
 
