@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "type": "module",
   "description": "[![Actions Status](https://github.com/nosaxa/frontend-project-lvl2/workflows/hexlet-check/badge.svg)](https://github.com/nosaxa/frontend-project-lvl2/actions)",
-  "main": "src/compareFiles.js",
+  "main": "index.js",
   "bin": {
     "gendiff": "bin/genDiff.js"
   },
