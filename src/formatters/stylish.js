@@ -1,67 +1,59 @@
 import _ from 'lodash';
 
-const INDENT_SIZE = 2;
 const BASE_INDENT = 4;
-const CLOSE_INDENT = 2;
 
-const makeIndent = (n) => ' '.repeat(n);
+const calculateIndent = (depth, indent, sliceNumber = 0) => {
+  const result = ' '.repeat(indent * depth + 2).slice(sliceNumber);
+  return result;
+};
 
-const stringify = (data, depth) => {
-  if (!_.isPlainObject(data)) return data;
-
-  const currentIndent = depth + INDENT_SIZE * BASE_INDENT;
-  const closeIndent = INDENT_SIZE * CLOSE_INDENT;
-
-  const lines = Object.entries(data).map(([key, value]) => {
-    if (_.isPlainObject(value)) {
-      return `${makeIndent(currentIndent)}${key}: ${stringify(
-        value,
-        depth + closeIndent,
-      )}`;
+const stringify = (value, spacesCount) => {
+  const iter = (currentValue, depth) => {
+    if (!_.isObject(currentValue)) {
+      return currentValue;
     }
-    return `${makeIndent(currentIndent)}${key}: ${value}`;
-  });
 
-  return ['{', ...lines, `${makeIndent(depth + closeIndent)}}`].join('\n');
+    const indentSize = depth + 2;
+    const currentIndent = calculateIndent(indentSize, BASE_INDENT, 2);
+    const bracketIndent = calculateIndent(indentSize - 1, BASE_INDENT, 2);
+    const lines = Object.entries(currentValue).map(
+      ([key, val]) => `${currentIndent}${key}: ${iter(val, depth + 1)}`,
+    );
+
+    return ['{', ...lines, `${bracketIndent}}`].join('\n');
+  };
+
+  return iter(value, spacesCount);
 };
 
 export default (tree) => {
   const iter = (currentValue, depth) => {
+    const indent = calculateIndent(depth, BASE_INDENT);
+    const bracketIndent = calculateIndent(depth, BASE_INDENT, 2);
     const lines = currentValue.map((line) => {
       switch (line.status) {
         case 'added':
-          return `${makeIndent(depth + INDENT_SIZE)}+ ${line.key}: ${stringify(
-            line.value,
-            depth,
-          )}`;
+          return [`${indent}+ ${line.key}: ${stringify(line.value, depth)}`];
         case 'deleted':
-          return `${makeIndent(depth + INDENT_SIZE)}- ${line.key}: ${stringify(
-            line.value,
-            depth,
-          )}`;
+          return [`${indent}- ${line.key}: ${stringify(line.value, depth)}`];
         case 'changed':
-          return `${makeIndent(depth + INDENT_SIZE)}- ${line.key}: ${stringify(
-            line.oldValue,
-            depth,
-          )}\n${makeIndent(depth + INDENT_SIZE)}+ ${line.key}: ${stringify(
-            line.newValue,
-            depth,
-          )}`;
+          return [
+            `${indent}- ${line.key}: ${stringify(
+              line.oldValue,
+              depth,
+            )}\n${indent}+ ${line.key}: ${stringify(line.newValue, depth)}`,
+          ];
         case 'unchanged':
-          return `${makeIndent(depth + INDENT_SIZE)}  ${line.key}: ${stringify(
-            line.value,
-            depth,
-          )}`;
+          return [`${indent}  ${line.key}: ${stringify(line.value, depth)}`];
         case 'nested':
-          return `${makeIndent(depth + INDENT_SIZE)}  ${line.key}: ${iter(
-            line.children,
-            depth + INDENT_SIZE * 2,
-          )}`;
+          return [`${indent}  ${line.key}: ${iter(line.children, depth + 1)}`];
         default:
-          throw new Error(`Wrong type ${line.status}`);
+          throw new Error(`Wrong type: ${line.status}`);
       }
     });
-    return ['{', ...lines, `${makeIndent(depth)}}`].join('\n');
+
+    return ['{', ...lines, `${bracketIndent}}`].join('\n');
   };
+
   return iter(tree, 0);
 };
