@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import { Command } from 'commander/esm.mjs';
-import compareFiles from '../src/compareFiles.js';
+import compareFiles from '../index.js';
 
 const program = new Command();
 
