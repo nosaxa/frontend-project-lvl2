@@ -1,7 +1,7 @@
 import yaml from 'js-yaml';
 
-const parseFile = (data, ext) => {
-  switch (ext) {
+const parseFile = (data, format) => {
+  switch (format) {
     case 'json':
       return JSON.parse(data);
     case 'yaml':
@@ -9,7 +9,7 @@ const parseFile = (data, ext) => {
     case 'yml':
       return yaml.load(data);
     default:
-      throw new Error(`Invalid file extension: ${ext}`);
+      throw new Error(`Invalid file extension: ${format}`);
   }
 };
 
